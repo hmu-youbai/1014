@@ -1,0 +1,66 @@
+qq=read.table("108.txt")
+library(dplyr)
+qq2=select(qq,-V2)
+qq2=select(qq2,-V3)
+qq2=select(qq2,-V4)
+qq2=select(qq2,-V5)
+qq2=select(qq2,-V6)
+
+ss=t(qq2[1,])
+colnames(qq2)=ss
+
+qq2=select(qq2,-C8C69_combined_R1_val_1.fq.gz_STARAligned.out.bam)
+qq2=select(qq2,-C8C70_combined_R1_val_1.fq.gz_STARAligned.out.bam)
+qq2=select(qq2,-C8C71_combined_R1_val_1.fq.gz_STARAligned.out.bam)
+qq2=select(qq2,-C8C78_combined_R1_val_1.fq.gz_STARAligned.out.bam)
+qq2=select(qq2,-C8B4_combined_R1_val_1.fq.gz_STARAligned.out.bam)
+
+write.table(qq2,"qq2",row.names = FALSE,
+            col.names = FALSE,quote=FALSE)
+
+
+
+
+
+
+setwd("C:/Users/0.0/Desktop/108")
+a1=read.table("test_counts.txt")
+
+ss=t(a1[1,])
+colnames(a2)=ss
+
+
+
+
+setwd("C:/Users/0.0/Desktop")
+
+zz=read.table("108.txt")
+
+ss=t(zz[1,])
+colnames(zz)=ss
+zz=zz[-1,]
+kb <- as.numeric(zz$Length)  / 1000
+countdata <- zz[,7:615]
+rpk <- cc / kb
+rpk <- countdata / kb
+
+
+
+
+
+mycounts<-read.csv("merge.csv")
+head(mycounts)
+rownames(mycounts)<-mycounts[,1]
+mycounts<-mycounts[,-1]
+head(mycounts)#最后一列Length是基因长度
+
+#TPM计算
+kb <- zz$Length / 1000
+kb
+countdata <- mycounts[,7:615]
+rpk <- countdata / kb
+rpk
+tpm <- t(t(rpk)/colSums(rpk) * 1000000)
+head(tpm)
+write.table(tpm,file="tpm.xls",sep="\t",quote=F)
+
