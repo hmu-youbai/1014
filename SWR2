@@ -1,0 +1,150 @@
+seq1="AGCT"
+seq2="AGCTAGCT"
+
+
+aa1=function(seq1,seq2){
+  seq1=unlist(strsplit(seq1, ''))
+  seq2=unlist(strsplit(seq2, ''))
+  
+  zz=rep(0,length(seq1)+1)
+  jiejie1=c()
+  jiejie2=c()
+  jiejie3=zz
+  zj=0
+  for (i in 2:(length(seq2)+1 )){
+    for (j in 2:(length(seq1) + 1)){
+      x=zz[j-1]
+      y=zz[j]
+      z=zj
+      if (seq2[i-1]==seq1[j-1]||(seq2[i-1]=="T"&&seq1[j-1]=="C")){
+        match = 5
+      }else{
+        match = 0
+      }
+      gap1_score = z -6
+      gap2_score = y -6
+      match_score = x + match
+      score = max(gap1_score, gap2_score, match_score)
+      if (score > 0){
+        zj = score
+      }else{
+        zj = 0
+      }
+      jiejie1=append(jiejie1,zj)
+    }
+    jiejie2=append(0,jiejie1)
+    zz=jiejie2
+    jiejie3=append(jiejie3,jiejie2)
+    jiejie1=c()
+    jiejie2=c()
+    zj=0
+  }  
+}
+
+
+
+seq1=unlist(strsplit(seq1, ''))
+seq2=unlist(strsplit(seq2, ''))
+
+zz=rep(0,length(seq1)+1)
+jiejie1=c()
+jiejie2=c()
+jiejie3=zz
+zj=0
+for (i in 2:(length(seq2)+1 )){
+  for (j in 2:(length(seq1) + 1)){
+    x=zz[j-1]
+    y=zz[j]
+    z=zj
+    if (seq2[i-1]==seq1[j-1]||(seq2[i-1]=="T"&&seq1[j-1]=="C")){
+      match = 5
+    }else{
+      match = 0
+    }
+    gap1_score = z -6
+    gap2_score = y -6
+    match_score = x + match
+    score = max(gap1_score, gap2_score, match_score)
+    if (score > 0){
+      zj = score
+    }else{
+      zj = 0
+    }
+    jiejie1=append(jiejie1,zj)
+  }
+  jiejie2=append(0,jiejie1)
+  zz=jiejie2
+  jiejie3=append(jiejie3,jiejie2)
+  jiejie1=c()
+  jiejie2=c()
+  zj=0
+}  
+
+
+
+
+
+jiejie3
+
+
+
+seq1=unlist(strsplit(seq1, ''))
+seq2=unlist(strsplit(seq2, ''))
+s1 = ''
+s2 = ''
+best_matrix=matrix(rep(0,(length(seq2)+1)*(length(seq1) + 1)),nrow=length(seq2)+1,ncol=length(seq1)+1,byrow=TRUE)
+
+
+
+
+for (i in 2:(length(seq2) + 1)){
+  for (j in 2:(length(seq1) + 1)){
+    if (seq2[i-1]==seq1[j-1]||(seq2[i-1]=="T"&&seq1[j-1]=="C")){
+      match = 5
+    }else{
+      match = 0
+    }
+    gap1_score = best_matrix[i-1,j] -6
+    gap2_score = best_matrix[i,j-1] -6
+    match_score = best_matrix[i-1,j-1] + match
+    score = max(gap1_score, gap2_score, match_score)
+    if (score > 0){
+      best_matrix[i,j] = score
+    }else{
+      best_matrix[i,j] = 0
+    }
+  }
+}
+
+
+
+
+aa2=function(seq1,seq2){
+  seq1=unlist(strsplit(seq1, ''))
+  seq2=unlist(strsplit(seq2, ''))
+  s1 = ''
+  s2 = ''
+  best_matrix=matrix(rep(0,(length(seq2)+1)*(length(seq1) + 1)),nrow=length(seq2)+1,ncol=length(seq1)+1,byrow=TRUE)
+  
+  
+  
+  
+  for (i in 2:(length(seq2) + 1)){
+    for (j in 2:(length(seq1) + 1)){
+      if (seq2[i-1]==seq1[j-1]||(seq2[i-1]=="T"&&seq1[j-1]=="C")){
+        match = 5
+      }else{
+        match = 0
+      }
+      gap1_score = best_matrix[i-1,j] -6
+      gap2_score = best_matrix[i,j-1] -6
+      match_score = best_matrix[i-1,j-1] + match
+      score = max(gap1_score, gap2_score, match_score)
+      if (score > 0){
+        best_matrix[i,j] = score
+      }else{
+        best_matrix[i,j] = 0
+      }
+    }
+  }
+}
